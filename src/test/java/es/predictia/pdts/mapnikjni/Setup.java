@@ -1,4 +1,4 @@
-package mapnik;
+package es.predictia.pdts.mapnikjni;
 
 
 public class Setup {
