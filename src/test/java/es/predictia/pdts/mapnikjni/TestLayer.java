@@ -1,4 +1,4 @@
-package mapnik;
+package es.predictia.pdts.mapnikjni;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -65,13 +65,14 @@ public class TestLayer {
 	
 	@Test
 	public void testDatasource() {
+
+		if (!isPostgisAvailable()) {
+			return;
+		}
 		Layer layer=new Layer("test");
 		assertNull(layer.getDatasource());
 		
-		Parameters params=new Parameters();
-		params.put("type", "postgis");
-		params.put("dbname", "mapnik-tmp-postgis-test-db");
-		params.put("table", "test");
+		Parameters params=getPostgisParameters();
 		
 		Datasource ds=DatasourceCache.create(params);
 		layer.setDatasource(ds);
@@ -80,5 +81,29 @@ public class TestLayer {
 		params=ds.getParameters();
 		assertEquals("postgis", params.get("type"));
 		assertEquals("test", params.get("table"));
+	}
+
+	private Parameters getPostgisParameters() {
+		var params = new Parameters();
+		params.put("type", "postgis");
+		params.put("host", System.getenv("PG_HOST"));
+		params.put("port", System.getenv("PG_PORT"));
+		params.put("user", System.getenv("PG_USER"));
+		params.put("password", System.getenv("PG_PASSWORD"));
+		params.put("dbname", System.getenv("PG_DBNAME"));
+		params.put("table", "test");
+		return params;
+	}
+
+	private boolean isPostgisAvailable() {
+		// Check if PG_HOST, PG_PORT, PG_USER, PG_PASSWORD, PG_DBNAME are set
+		String[] envVars = { "PG_HOST", "PG_PORT", "PG_USER", "PG_PASSWORD", "PG_DBNAME" };
+		for (String envVar : envVars) {
+			if (System.getenv(envVar) == null) {
+				System.out.println("Skipping test because " + envVar + " is not set");
+				return false;
+			}
+		}
+		return true;
 	}
 }

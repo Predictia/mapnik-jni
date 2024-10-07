@@ -1,7 +1,6 @@
-package mapnik;
+package es.predictia.pdts.mapnikjni;
 
 import java.io.File;
-import java.util.Arrays;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -24,5 +23,12 @@ public class TestLoadLibrary {
 		
 		assertTrue(new File(Mapnik.getInstalledFontsDir()).isDirectory());
 		assertTrue(new File(Mapnik.getInstalledInputPluginsDir()).isDirectory());
+	}
+
+	@Test
+	public void testLoadFromClassPath() {
+		Mapnik.tryLoadLibrary(false);
+		Mapnik.initialize();
+		System.out.println(Mapnik.version());
 	}
 }
