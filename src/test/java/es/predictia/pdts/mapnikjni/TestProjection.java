@@ -6,15 +6,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TestProjection {
+
 	@BeforeClass
 	public static void initMapnik() {
 		Mapnik.initialize();
 	}
+
 	@AfterClass
 	public static void tearDownMapnik() {
 		Setup.tearDown();
 	}
-
 
 	@Test
 	public void testForward() {

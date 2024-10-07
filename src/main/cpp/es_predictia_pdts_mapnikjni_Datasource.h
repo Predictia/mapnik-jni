@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     es_predictia_pdts_mapnikjni_Datasource
+ * Method:    dealloc
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_es_predictia_pdts_mapnikjni_Datasource_dealloc
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     es_predictia_pdts_mapnikjni_Datasource
  * Method:    getParameters
  * Signature: ()Les/predictia/pdts/mapnikjni/Parameters;
  */
@@ -30,14 +38,6 @@ JNIEXPORT jint JNICALL Java_es_predictia_pdts_mapnikjni_Datasource_getType
  */
 JNIEXPORT jobject JNICALL Java_es_predictia_pdts_mapnikjni_Datasource_getEnvelope
   (JNIEnv *, jobject);
-
-/*
- * Class:     es_predictia_pdts_mapnikjni_Datasource
- * Method:    dealloc
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_es_predictia_pdts_mapnikjni_Datasource_dealloc
-  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     es_predictia_pdts_mapnikjni_Datasource

@@ -289,11 +289,11 @@ public:
 	const char* stringz;
 	bool isnull;
 
-	refjavastring(JNIEnv* env, jstring js) {
-		this->env=env;
-		this->js=js;
+	refjavastring(JNIEnv* current_env, jstring current_js) {
+		this->env=current_env;
+		this->js=current_js;
 		if (js) {
-			stringz=env->GetStringUTFChars(js, &isCopy);
+			stringz=current_env->GetStringUTFChars(js, &isCopy);
 			isnull=false;
 		} else {
 			stringz="";
